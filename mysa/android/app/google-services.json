@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566704521522",
+    "project_id": "mysa-app-production",
+    "storage_bucket": "mysa-app-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566704521522:android:6ccd9631e31101919f572b",
+        "android_client_info": {
+          "package_name": "com.mysa.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566704521522-h9sg2v4bjju4spc47c0udiktrupiq2db.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_X2xYM-_z1b0TLG9VM-ZpvNJoX81PE3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566704521522-h9sg2v4bjju4spc47c0udiktrupiq2db.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
