@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:mysa/colors.dart';
+import 'package:mysa/welcome.dart';
 
 import 'email_login.dart';
 import 'email_signup.dart';
@@ -76,7 +77,20 @@ class SignUp extends StatelessWidget {
                         context,
                         MaterialPageRoute(builder: (context) => EmailLogIn()),
                       );
-                    }))
+                    })),
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(mysa_secondary),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Welcome()),
+                );
+              },
+              child: Text('Welcome'),
+            )
           ]),
         ));
   }
