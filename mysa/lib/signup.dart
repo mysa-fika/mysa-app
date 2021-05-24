@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:mysa/colors.dart';
 
 import 'email_login.dart';
 import 'email_signup.dart';
@@ -12,17 +13,36 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(this.title),
+          title: Text(
+            this.title,
+            style: TextStyle(
+              color: mysa_contrast,
+            ),
+          ),
+          flexibleSpace: Container(
+            decoration: new BoxDecoration(
+              gradient: new LinearGradient(
+                  colors: [
+                    mysa_primary,
+                    mysa_secondary,
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(1.0, 0.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
+          ),
         ),
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
               Widget>[
             Padding(
               padding: EdgeInsets.all(10.0),
-              child: Text("Meet Up",
+              child: Text("Mysa.",
                   style: TextStyle(
+                      color: mysa_secondary,
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 50,
                       fontFamily: 'Roboto')),
             ),
             Padding(
@@ -37,20 +57,20 @@ class SignUp extends StatelessWidget {
                     );
                   },
                 )),
-            Padding(
-                padding: EdgeInsets.all(10.0),
-                child: SignInButton(
-                  Buttons.Google,
-                  text: "Sign up with Google",
-                  onPressed: () {},
-                )),
+            // Padding(
+            //     padding: EdgeInsets.all(10.0),
+            //     child: SignInButton(
+            //       Buttons.Google,
+            //       text: "Sign up with Google",
+            //       onPressed: () {},
+            //     )),
             Padding(
                 padding: EdgeInsets.all(10.0),
                 child: GestureDetector(
                     child: Text("Log In Using Email",
                         style: TextStyle(
                             decoration: TextDecoration.underline,
-                            color: Colors.blue)),
+                            color: mysa_contrast)),
                     onTap: () {
                       Navigator.push(
                         context,

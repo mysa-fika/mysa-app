@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
 import 'home.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -23,26 +24,19 @@ class _EmailSignUpWidgetState extends State<EmailSignUp> {
 
   @override
   Widget build(BuildContext context) {
-    DatabaseReference dbRef = dbInstance.reference();
+    //DatabaseReference dbRef = dbInstance.reference();
 
     void registerToFb() {
       firebaseAuth
           .createUserWithEmailAndPassword(
               email: emailController.text, password: passwordController.text)
-          .then((result) {
-        dbRef.child("User").child(result.user!.uid).set({
-          "email": emailController.text,
-          "age": ageController.text,
-          "name": nameController.text
-        }).then((res) {
-          print(result.user);
-          isLoading = false;
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Home(uid: result.user!.uid)),
-          );
-        });
+          .then((res) {
+        print(res.user);
+        isLoading = false;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Home(uid: res.user!.uid)),
+        );
       }).catchError((err) {
         showDialog(
             context: context,
@@ -157,7 +151,7 @@ class _EmailSignUpWidgetState extends State<EmailSignUp> {
                     : ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.lightBlue)),
+                                mysa_secondary)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
@@ -186,3 +180,10 @@ class _EmailSignUpWidgetState extends State<EmailSignUp> {
     ageController.dispose();
   }
 }
+
+// .then((result) {
+//         dbRef.child("User").child(result.user!.uid).set({
+//           "email": emailController.text,
+//           "age": ageController.text,
+//           "name": nameController.text
+//         })

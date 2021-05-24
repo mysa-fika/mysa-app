@@ -5,6 +5,8 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mysa/email_signup.dart';
 import 'package:mysa/signup.dart';
 
+import 'colors.dart';
+
 class Home extends StatelessWidget {
   Home({required this.uid});
   final String uid;
@@ -80,7 +82,7 @@ class _NavigateDrawerState extends State<NavigateDrawer> {
                   }
                 }),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: mysa_secondary,
             ),
           ),
           ListTile(

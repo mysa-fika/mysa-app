@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mysa/colors.dart';
 import 'package:mysa/home.dart';
 import 'package:mysa/email_signup.dart';
 import 'package:mysa/signup.dart';
+import 'package:mysa/welcome.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
@@ -22,13 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Meet Up',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: IntroScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Mysa.',
+        theme: ThemeData(
+          primaryColor: mysa_primary,
+        ),
+        //    home: IntroScreen());
+        home: Welcome());
   }
 }
 
@@ -110,7 +112,7 @@ class IntroScreen extends StatelessWidget {
         navigateAfterSeconds: result != null ? Home(uid: result.uid) : SignUp(),
         seconds: 5,
         title: new Text(
-          'Welcome To Meet up!',
+          'Welcome To Mysa.',
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
         image: Image.asset('assets/images/dart.png', fit: BoxFit.scaleDown),

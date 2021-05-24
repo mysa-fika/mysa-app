@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mysa/colors.dart';
 
 import 'home.dart';
 
@@ -74,7 +75,7 @@ class _EmailLogInState extends State<EmailLogIn> {
                     : ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.lightBlue)),
+                                mysa_secondary)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
@@ -90,6 +91,7 @@ class _EmailLogInState extends State<EmailLogIn> {
   }
 
   void logInToFb() {
+    print("what");
     FirebaseAuth.instance
         .signInWithEmailAndPassword(
             email: emailController.text, password: passwordController.text)
