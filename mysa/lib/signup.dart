@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:mysa/colors.dart';
 import 'package:mysa/welcome.dart';
+import 'package:mysa/welcome_screen.dart';
 
 import 'email_login.dart';
 import 'email_signup.dart';
@@ -86,7 +87,7 @@ class SignUp extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Welcome()),
+                  MaterialPageRoute(builder: (context) => Carousel()),
                 );
               },
               child: Text('Welcome'),

@@ -6,6 +6,7 @@ import 'package:mysa/home.dart';
 import 'package:mysa/email_signup.dart';
 import 'package:mysa/signup.dart';
 import 'package:mysa/welcome.dart';
+import 'package:mysa/welcome_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
           primaryColor: mysa_primary,
         ),
         //    home: IntroScreen());
-        home: Welcome());
+        // home: Welcome());
+        home: Carousel());
   }
 }
 
