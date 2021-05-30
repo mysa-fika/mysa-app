@@ -10,8 +10,27 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
-  var current_step = 1;
+  static var current_step = 1;
+  static var points = 0;
   final double step = 0.125;
+
+  var questions = [
+    "I experience little interest or pleasure in doing things.",
+    "I am feeling down, depressed, or hopeless.",
+    "I am having trouble falling or staying asleep, or sleeping too much.",
+    "I am feeling tired or having little energy.",
+    "I have poor appetite or I am overeating.",
+    "I am feeling bad about myself - that I am a failure or have let myself or my family down?",
+    "I am having trouble concentrating on things, such as reading the newspaper or watching television.",
+    "I am moving or speaking so slowly that other people could have noticed. Or so fidgety or restless that I have been moving a lot more than usual.",
+    "I am having thoughts that I would be better off dead, or thoughts of hurting myself in some way."
+  ];
+
+  var options = [
+    "Several days",
+    "More than half of the days",
+    "Nearly every day"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +50,8 @@ class _OnboardingState extends State<Onboarding> {
                         mysa_primary.withOpacity(1)),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Carousel()),
-                    );
+                    current_step++;
+                    setState(() {});
                   },
                   child: Text(
                     'No',
@@ -54,10 +71,8 @@ class _OnboardingState extends State<Onboarding> {
                         mysa_secondary.withOpacity(0.8)),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Carousel()),
-                    );
+                    current_step++;
+                    setState(() {});
                   },
                   child: Text(
                     'Yes',
@@ -96,7 +111,7 @@ class _OnboardingState extends State<Onboarding> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Carousel()),
+                        MaterialPageRoute(builder: (context) => Onboarding()),
                       );
                     },
                   ),
@@ -127,7 +142,7 @@ class _OnboardingState extends State<Onboarding> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Carousel()),
+                        MaterialPageRoute(builder: (context) => Onboarding()),
                       );
                     },
                   ),
@@ -139,7 +154,7 @@ class _OnboardingState extends State<Onboarding> {
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
             child: Center(
               child: Text(
-                "I experience little interest or pleasure in doing things.",
+                questions[current_step - 1],
                 style: TextStyle(
                   color: mysa_contrast,
                   fontSize: 24,
@@ -149,11 +164,13 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Image.asset(
-            'assets/images/1.png',
+            'assets/images/$current_step.png',
             scale: 0.3,
           ),
         ],
       ),
     );
   }
+
+  void showOptions() {}
 }
