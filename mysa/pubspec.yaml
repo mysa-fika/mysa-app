@@ -37,6 +37,11 @@ dependencies:
   splashscreen: ^1.2.0
   flutter_signin_button: ^2.0.0-nullsafety.0
   firebase_database: ^7.0.0-dev.2
+  postgres: ^2.3.2
+  google_fonts: ^2.1.0
+  table_calendar: ^3.0.1
+  shared_preferences: ^0.5.4+5
+  carousel_slider: ^4.0.0 
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +54,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/mysa.png
+    - assets/images/mysa-cropped.png
+    - assets/images/0.png
     - assets/images/1.png
     - assets/images/2.png
     - assets/images/3.png
@@ -57,7 +64,9 @@ flutter:
     - assets/images/6.png
     - assets/images/7.png
     - assets/images/8.png
-    - assets/images/9.png
+    - assets/images/carousel-1.png
+    - assets/images/carousel-2.png
+    - assets/images/sky.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

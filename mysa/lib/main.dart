@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mysa/colors.dart';
 import 'package:mysa/home.dart';
 import 'package:mysa/email_signup.dart';
+import 'package:mysa/onboarding.dart';
 import 'package:mysa/signup.dart';
 import 'package:mysa/welcome.dart';
 import 'package:mysa/welcome_screen.dart';
+import 'package:postgres/postgres.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
@@ -14,7 +16,16 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final globalKey = GlobalKey<ScaffoldState>();
 
+// var connection = PostgreSQLConnection(
+//   "localhost",
+//   5432,
+//   "postgres",
+//   username: "root",
+//   password: "root",
+// );
+
 Future main() async {
+  // await connection.open();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -33,6 +44,7 @@ class MyApp extends StatelessWidget {
         //    home: IntroScreen());
         // home: Welcome());
         home: Carousel());
+    // home: Onboarding());
   }
 }
 

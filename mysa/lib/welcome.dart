@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mysa/colors.dart';
 import 'package:mysa/signup.dart';
+import 'package:postgres/postgres.dart';
 
 class Welcome extends StatelessWidget {
   @override

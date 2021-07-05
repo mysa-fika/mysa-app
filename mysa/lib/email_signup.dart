@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mysa/database.dart';
+import 'package:mysa/model/profile.dart';
 
 import 'colors.dart';
 import 'home.dart';
+import 'main.dart';
 
 class EmailSignUp extends StatefulWidget {
   @override
@@ -152,11 +155,17 @@ class _EmailSignUpWidgetState extends State<EmailSignUp> {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 mysa_secondary)),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               isLoading = true;
                             });
+                            // await connection.query(
+                            //     "INSERT INTO public.profiles (full_name, birth_date) VALUES (@name:string, @date:string)",
+                            //     substitutionValues: {
+                            //       "name": nameController.value.text,
+                            //       "date": "10.10.10",
+                            //     });
                             registerToFb();
                           }
                         },

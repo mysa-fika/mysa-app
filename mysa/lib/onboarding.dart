@@ -1,18 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mysa/calendar.dart';
+import 'package:mysa/modal_bottom_sheet.dart';
+import 'package:mysa/showup.dart';
+import 'package:mysa/signup.dart';
 import 'package:mysa/welcome_screen.dart';
 
 import 'colors.dart';
 
+//0.125
+class Question {
+  final int current_step;
+  final String question;
+
+  Question(this.current_step, this.question);
+}
+
+final q = [
+  "I experience little interest or pleasure in doing things.",
+  "I'v been feeling down, depressed, or hopeless.",
+  "I have trouble falling or staying asleep, or I sleep too much.",
+  "I feel tired or have little energy.",
+  "I have poor appetite or overeat.",
+  "I feel bad about myself — or that I'm a failure or have let myself or my family down.",
+  "I have trouble concentrating on things, such as reading the newspaper or watching television.",
+  "I move or speak so slowly that other people could have noticed. Or so fidgety or restless that I have been moving a lot more than usual.",
+  "I have thoughts that I would be better off dead, or thoughts of hurting myself in some way."
+];
+
+final questions = List.generate(9, (index) => Question(index, q[index]));
+
 class Onboarding extends StatefulWidget {
+  final int index;
+  final int score;
+
+  Onboarding({Key? key, required this.index, required this.score}) : super();
+
   @override
-  _OnboardingState createState() => _OnboardingState();
+  _OnboardingState createState() =>
+      _OnboardingState(question: questions[index], score: score);
 }
 
 class _OnboardingState extends State<Onboarding> {
-  static var current_step = 1;
-  static var points = 0;
-  final double step = 0.125;
+  final double step = 0.1111;
+  final Question question;
+  final int score;
+
+  _OnboardingState({Key? key, required this.question, required this.score})
+      : super();
 
   var questions = [
     "I experience little interest or pleasure in doing things.",
@@ -50,8 +85,15 @@ class _OnboardingState extends State<Onboarding> {
                         mysa_primary.withOpacity(1)),
                   ),
                   onPressed: () {
-                    current_step++;
-                    setState(() {});
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => question.current_step == 8
+                              ? SignUp()
+                              : Onboarding(
+                                  index: question.current_step + 1,
+                                  score: score)),
+                    );
                   },
                   child: Text(
                     'No',
@@ -71,8 +113,69 @@ class _OnboardingState extends State<Onboarding> {
                         mysa_secondary.withOpacity(0.8)),
                   ),
                   onPressed: () {
-                    current_step++;
-                    setState(() {});
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                // leading: new Icon(Icons.photo),
+                                title: new Text('Several days'),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            question.current_step == 8
+                                                ? SignUp()
+                                                : Onboarding(
+                                                    index:
+                                                        question.current_step +
+                                                            1,
+                                                    score: score + 1)),
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                // leading: new Icon(Icons.music_note),
+                                title: new Text('More than half the days'),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            question.current_step == 8
+                                                ? SignUp()
+                                                : Onboarding(
+                                                    index:
+                                                        question.current_step +
+                                                            1,
+                                                    score: score + 2)),
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                // leading: new Icon(Icons.videocam),
+                                title: new Text('Nearly every day'),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            question.current_step == 8
+                                                ? SignUp()
+                                                : Onboarding(
+                                                    index:
+                                                        question.current_step +
+                                                            1,
+                                                    score: score + 3)),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        });
                   },
                   child: Text(
                     'Yes',
@@ -109,10 +212,11 @@ class _OnboardingState extends State<Onboarding> {
                       size: 24,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Onboarding()),
-                      );
+                      Navigator.pop(context);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => Carousel()),
+                      // );
                     },
                   ),
                   Padding(
@@ -124,7 +228,7 @@ class _OnboardingState extends State<Onboarding> {
                         backgroundColor: mysa_secondary.withOpacity(0.3),
                         valueColor:
                             AlwaysStoppedAnimation<Color>(mysa_secondary),
-                        value: step * current_step,
+                        value: step * question.current_step,
                       ),
                     ),
                   ),
@@ -142,7 +246,11 @@ class _OnboardingState extends State<Onboarding> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Onboarding()),
+                        MaterialPageRoute(
+                            builder: (context) => Onboarding(
+                                  index: 0,
+                                  score: 0,
+                                )),
                       );
                     },
                   ),
@@ -150,23 +258,34 @@ class _OnboardingState extends State<Onboarding> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-            child: Center(
-              child: Text(
-                questions[current_step - 1],
-                style: TextStyle(
-                  color: mysa_contrast,
-                  fontSize: 24,
+          ShowUp(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+              child: Center(
+                child: Text(
+                  question.question,
+                  style: TextStyle(
+                    color: mysa_contrast,
+                    fontSize: 24,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
+            delay: 500,
           ),
-          Image.asset(
-            'assets/images/$current_step.png',
-            scale: 0.3,
-          ),
+          ShowUp(
+            child: SizedBox(
+              height: 370,
+              width: 450,
+              child: Image.asset(
+                'assets/images/${question.current_step}.png',
+                fit: BoxFit.contain,
+                // scale: 0.3,
+              ),
+            ),
+            delay: 500,
+          )
         ],
       ),
     );

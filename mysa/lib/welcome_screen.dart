@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mysa/calendar.dart';
+import 'package:mysa/email_login.dart';
+import 'package:mysa/email_signup.dart';
 import 'package:mysa/onboarding.dart';
+import 'package:mysa/showup.dart';
 import 'package:mysa/signup.dart';
 import 'package:page_indicator/page_indicator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'colors.dart';
 
@@ -17,6 +23,75 @@ class _CarouselState extends State<Carousel>
   @override
   Widget build(BuildContext context) {
     List<Widget> _list = [
+      // SliderBox(child: SignUp()),
+      SliderBox(
+          child: new Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              mysa_secondary.withOpacity(0.4),
+              mysa_primary.withOpacity(0.4),
+            ],
+          ),
+        ),
+        child: Column(
+          children: <Widget>[
+            ShowUp(
+              child: SizedBox(
+                height: 500,
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Image.asset(
+                    'assets/images/mysa.png',
+                    scale: 0.3,
+                  ),
+                ),
+              ),
+              delay: 600,
+            ),
+            ShowUp(
+              child: SizedBox(
+                  height: 180,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Let\'s get through this together!',
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          fontFamily: 'packages/cool_fonts/Roboto',
+                          fontSize: 26,
+                          color: mysa_contrast,
+                        ),
+                      ),
+                    ),
+                  )),
+              delay: 900,
+            )
+          ],
+        ),
+      )),
+      SliderBox(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/carousel-1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+      SliderBox(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/carousel-2.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
       SliderBox(
           child: new Container(
         decoration: BoxDecoration(
@@ -24,24 +99,27 @@ class _CarouselState extends State<Carousel>
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            mysa_secondary.withOpacity(0.2),
-            mysa_primary.withOpacity(0.2),
+            mysa_secondary.withOpacity(0.4),
+            mysa_primary.withOpacity(0.4),
           ],
         )),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 500,
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Image.asset(
-                  'assets/images/mysa.png',
-                  scale: 0.3,
+            ShowUp(
+              child: SizedBox(
+                height: 490,
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Image.asset(
+                    'assets/images/mysa.png',
+                    scale: 0.3,
+                  ),
                 ),
               ),
+              delay: 500,
             ),
             SizedBox(
-              height: 190,
+              height: 160,
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: SizedBox(
@@ -55,35 +133,58 @@ class _CarouselState extends State<Carousel>
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Onboarding()),
+                        MaterialPageRoute(
+                            builder: (context) => Onboarding(
+                                  index: 0,
+                                  score: 0,
+                                )),
+                        // MaterialPageRoute(builder: (context) => EmailSignUp()),
                       );
                     },
                     child: Text(
                       'Get Started',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 20,
                       ),
                     ),
                   ),
                 ),
               ),
-            )
+            ),
+            new Padding(
+              padding: EdgeInsets.all(10.0),
+            ),
+            new Center(
+              child: new RichText(
+                text: new TextSpan(
+                  children: [
+                    new TextSpan(
+                      text: 'Log in',
+                      style: new TextStyle(
+                        color: mysa_contrast,
+                        fontSize: 20,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: new TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EmailLogIn()));
+                        },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       )),
-      SliderBox(
-          child: FlutterLogo(
-        textColor: Colors.green,
-      )),
-      SliderBox(
-          child: FlutterLogo(
-        textColor: Colors.blue,
-      ))
     ];
 
     void _animateSlider() {
-      Future.delayed(Duration(seconds: 5)).then((_) {
+      Future.delayed(Duration(seconds: 2)).then((_) {
         int nextPage = _controller.page!.round() + 1;
 
         if (nextPage == _list.length) {
@@ -115,14 +216,17 @@ class _CarouselState extends State<Carousel>
       indicatorSelectorColor: Colors.grey,
     );
 
-    return Stack(
-      children: <Widget>[
-        Container(color: Colors.grey[100], height: double.infinity),
-        Container(
-            color: Colors.white,
-            child: container,
-            margin: EdgeInsets.only(bottom: 0)),
-      ],
+    return Material(
+      type: MaterialType.transparency,
+      child: Stack(
+        children: <Widget>[
+          Container(color: Colors.grey[100], height: double.infinity),
+          Container(
+              color: Colors.white,
+              child: container,
+              margin: EdgeInsets.only(bottom: 0)),
+        ],
+      ),
     );
   }
 }
