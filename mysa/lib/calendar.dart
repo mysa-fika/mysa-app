@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home.dart';
+
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
@@ -85,17 +87,65 @@ class _CalendarState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 1;
+
+    void _onItemTapped(int index) {
+      switch (index) {
+        case 0:
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Home(
+                      uid: "",
+                    )),
+          );
+          break;
+        default:
+      }
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Calendar',
-          style: TextStyle(
-            color: Colors.white,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex, //New
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Goals',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz),
+            label: 'More',
+          ),
+        ],
       ),
       body: Column(
         children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 40, 10, 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Calendar',
+                  style: TextStyle(
+                    color: mysa_contrast,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
           TableCalendar<Event>(
             firstDay: kFirstDay,
             lastDay: kLastDay,

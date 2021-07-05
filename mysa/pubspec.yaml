@@ -67,6 +67,17 @@ flutter:
     - assets/images/carousel-1.png
     - assets/images/carousel-2.png
     - assets/images/sky.jpg
+    - assets/images/one.png
+    - assets/images/two.png
+    - assets/images/three.png
+    - assets/images/four.png
+    - assets/images/five.png
+    - assets/images/six.png
+    - assets/images/seven.png
+    - assets/images/one.jpg
+    - assets/images/two.jpg
+    - assets/images/three.jpg
+    - assets/images/four.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
