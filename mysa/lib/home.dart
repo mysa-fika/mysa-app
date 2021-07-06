@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mysa/calendar.dart';
+import 'package:mysa/goals.dart';
 import 'colors.dart';
 
 class Home extends StatelessWidget {
@@ -19,6 +20,12 @@ class Home extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Calendar()),
+          );
+          break;
+        case 2:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Goals()),
           );
           break;
         default:
